@@ -5,19 +5,20 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { User } from "./User";
 
-@Entity("messages")
-class Message {
+@Entity("connections")
+class Connection {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({ name: "admin_id" })
   adminId: string;
 
-  @Column()
-  text: string;
+  @Column({ name: "socket_id" })
+  socketId: string;
 
   @JoinColumn({ name: "user_id" })
   @ManyToOne(() => User)
@@ -28,6 +29,9 @@ class Message {
 
   @CreateDateColumn({ name: "created_at" })
   createdAt: Date;
+
+  @UpdateDateColumn({ name: "updated_at" })
+  updatedAt: Date;
 }
 
-export { Message };
+export { Connection };

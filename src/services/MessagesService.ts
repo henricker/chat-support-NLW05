@@ -4,7 +4,7 @@ import { MessagesRepository } from "../repositories/MessagesRepository"
 
 
 interface IMessageCreated {
-  adminId: string;
+  adminId?: string;
   text: string;
   userId: string;
 }

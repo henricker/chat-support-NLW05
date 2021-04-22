@@ -22,7 +22,10 @@ class UserService {
     await this.userRepository.save(user);
 
     return user;
+  }
 
+  async findByEmail(email: string): Promise<User | undefined> {
+    return await this.userRepository.findOne({ email });
   }
 }
 

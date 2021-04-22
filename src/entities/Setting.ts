@@ -1,8 +1,13 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from "typeorm";
 
-@Entity('settings')
+@Entity("settings")
 class Setting {
-
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
