@@ -4,7 +4,6 @@ import { ConnectionsService } from '../services/ConnectionsService';
 import { MessagesService } from '../services/MessagesService';
 import { UserService } from '../services/UserService';
 
-
 interface IParams {
   message: string;
   email: string;
@@ -12,11 +11,13 @@ interface IParams {
 
 //Conect => get current connection
 io.on('connect', (socket: Socket) => {
-  socket.on('client_first_access', async (params) => {
 
-    const connectionsService = new ConnectionsService();
-    const userService = new UserService();
-    const messagesService = new MessagesService();
+  const connectionsService = new ConnectionsService();
+  const userService = new UserService();
+  const messagesService = new MessagesService();
+
+  //client firtst access
+  socket.on('client_first_access', async (params) => {
 
     const { message, email } = params as IParams;
     const socketId = socket.id;
@@ -58,6 +59,28 @@ io.on('connect', (socket: Socket) => {
         userId
       });
 
+      const allMessages = await messagesService.listByUser(userId);
+
+      socket.emit('client_list_all_messages', allMessages);
     }
+    const allUsers = await connectionsService.findAllWithoutAdmin();
+    io.emit("admin_list_all_users", allUsers);
   });
+
+    //client send to admin
+    socket.on("client_send_to_admin", async (params) => {
+      const { text, socket_admin_id } = params;
+
+      const { userId } = await connectionsService.findBySocketId(socket.id);
+
+      const message = await messagesService.create({
+        text,
+        userId
+      });
+
+      io.to(socket_admin_id).emit("admin_receive_message", {
+        message,
+        socketId: socket.id
+      });
+    });
 });

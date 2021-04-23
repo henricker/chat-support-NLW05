@@ -10,23 +10,21 @@
       rel="stylesheet"
     />
     <title></title>
-    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
     <div class="chat chat_support" id="chat_in_support">
       <div class="in_support_header">
         <span>Em suporte ... </span>
         <div class="icon_close" onclick="closeChat();">
-          <img src="../images/close.png" />
+          <img src="/images/close.png" />
         </div>
       </div>
 
       <div class="text_support">
-        <script id="email-template" type="text/template">
+        <script id="message-user-template" type="text/template">
           <div class="client">
             <span class="name">{{email}}</span>
-        </script>
-        <script id="message-user-template" type="text/template">
             <span class="client message">
               {{message}}
               <!-- <label class="date">{{date}}</label> -->
@@ -50,7 +48,7 @@
           id="message_user"
         />
         <div class="send_message_button" id="send_message_button">
-          <img src="../images/send.png" />
+          <img src="/images/send.png" />
         </div>
       </div>
     </div>
@@ -59,7 +57,7 @@
       <div class="in_support_header">
         <span>Iniciar um chat de suporte</span>
         <div class="icon_close" onclick="closeChat();">
-          <img src="../images/close.png" />
+          <img src="/images/close.png" />
         </div>
       </div>
       <div class="text_support text_help">
@@ -92,7 +90,7 @@
 
     <div>
       <button class="btn_support" id="btn_support" onclick="openChat();">
-        <img src="../images/chat.png" /> Suporte
+        <img src="/images/chat.png" /> Suporte
       </button>
     </div>
   </body>
